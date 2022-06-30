@@ -40,5 +40,11 @@
         "handle": "gift-voucher",
         "changelogUrl": "https://raw.githubusercontent.com/verbb/gift-voucher/craft-4/CHANGELOG.md",
         "class": "verbb\\giftvoucher\\GiftVoucher"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }

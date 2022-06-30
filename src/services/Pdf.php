@@ -1,4 +1,5 @@
 <?php
+
 namespace verbb\giftvoucher\services;
 
 use verbb\giftvoucher\GiftVoucher;
@@ -161,15 +162,17 @@ class Pdf extends Component
         $options->setLogOutputFile($dompdfLogFile);
         $options->setIsRemoteEnabled($isRemoteEnabled);
 
+        $pdfRenderOptionsEvent = new PdfRenderOptionsEvent([
+            'options' => $options,
+        ]);
+
         // Set additional render options
         if ($this->hasEventHandlers(self::EVENT_MODIFY_RENDER_OPTIONS)) {
-            $this->trigger(self::EVENT_MODIFY_RENDER_OPTIONS, new PdfRenderOptionsEvent([
-                'options' => $options,
-            ]));
+            $this->trigger(self::EVENT_MODIFY_RENDER_OPTIONS, $pdfRenderOptionsEvent);
         }
 
         // Set the options
-        $dompdf->setOptions($options);
+        $dompdf->setOptions($pdfRenderOptionsEvent->options);
 
         // Paper Size and Orientation
         $pdfPaperSize = $settings->pdfPaperSize;
