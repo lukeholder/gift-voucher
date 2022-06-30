@@ -7,7 +7,7 @@ use yii\base\Event;
 
 class PdfEvent extends Event
 {
-    public Order $order;
+    public ?Order $order;
     public ?string $option = null;
     public ?string $template = null;
     public array $variables = [];
